@@ -908,6 +908,21 @@ dialog[open]{animation:dlg .28s cubic-bezier(.2,.8,.2,1)}
 #promoGrid .promo h3>span{display:block;white-space:nowrap}
 /* Preserve the landline in markup while hiding it from the page. */
 a[href="tel:+74950000000"]{display:none!important}
+/* Match review navigation spacing to the site's 8px slider controls. */
+#reviews #reviewsWidget .sw-review-bottom .sw-swiper-button-prev{margin-right:8px!important}
+#reviews #reviewsWidget .sw-review-bottom .sw-swiper-button-next{margin-left:0!important}
+@media(max-width:640px){
+  #reviews #reviewsWidget .sw-review-box{margin-bottom:20px!important}
+  #reviews #reviewsWidget .sw-review-list{padding-top:3.5px!important}
+}
+
+/* Cookie notice matches the site palette and sits above the mobile action bar. */
+.cookie-notice{position:fixed;left:50%;bottom:calc(var(--cookie-mobile-bar,0px) + 16px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:70;width:min(1260px,calc(100% - 32px));display:flex;align-items:center;gap:24px;padding:18px 22px;background:var(--surface);color:var(--text);border:1px solid var(--line);border-radius:20px;box-shadow:0 8px 36px rgba(0,0,0,.16);font-family:var(--font-t)}
+.cookie-notice[hidden]{display:none}
+.cookie-notice p{margin:0;flex:1;font-size:14px;line-height:1.5}
+.cookie-notice a{color:var(--steel);text-decoration:underline;text-underline-offset:3px}
+.cookie-notice .btn{flex:none;min-width:86px;height:44px}
+@media(max-width:640px){.cookie-notice{width:calc(100% - 24px);padding:16px;gap:12px;border-radius:18px}.cookie-notice p{font-size:12px}.cookie-notice .btn{min-width:62px;padding:0 14px}}
 </style>
 </head>
 <body>
@@ -2013,6 +2028,28 @@ $$('.f-col h4').forEach(h=>{
   }
   document.addEventListener('click',e=>all.forEach(c=>{ if(!c.field.contains(e.target)) c.close(); }));
   $$('.field.sel select').forEach(enhance);
+})();
+</script>
+
+<aside class="cookie-notice" id="cookieNotice" aria-label="Использование cookies" hidden>
+  <p>Мы используем cookies и <a href="https://metrica.yandex.ru/about" target="_blank" rel="noopener">Яндекс.Метрику</a>, чтобы улучшать работу сайта.</p>
+  <button class="btn btn-signal" type="button" id="cookieAccept">Ок</button>
+</aside>
+<script>
+(()=>{
+  const notice=document.getElementById('cookieNotice'),key='lfg-cookie-notice-v1';
+  let accepted=false;
+  try{accepted=localStorage.getItem(key)==='accepted';}catch{}
+  if(accepted)return;
+  const bar=document.querySelector('.mbar');
+  const sync=()=>{const height=bar&&getComputedStyle(bar).display!=='none'?bar.getBoundingClientRect().height:0;notice.style.setProperty('--cookie-mobile-bar',height+'px');};
+  sync();notice.hidden=false;
+  const observer=bar?new ResizeObserver(sync):null;
+  observer?.observe(bar);window.addEventListener('resize',sync);
+  document.getElementById('cookieAccept').addEventListener('click',()=>{
+    try{localStorage.setItem(key,'accepted');}catch{}
+    notice.hidden=true;observer?.disconnect();window.removeEventListener('resize',sync);
+  });
 })();
 </script>
 </body>
