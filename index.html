@@ -86,7 +86,7 @@ html,body{overflow-x:clip}
 .nav-btn .ico{width:16px;height:16px;transition:transform .2s}
 .nav-btn:hover,.nav-item.open .nav-btn{background:var(--surface-2)}
 .nav-item.open .nav-btn .ico{transform:rotate(180deg)}
-.drop{position:absolute;top:calc(100% - 4px);left:50%;transform:translate(-50%,6px);min-width:300px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-m);box-shadow:0 24px 60px -20px rgba(15,19,23,.35);padding:10px;opacity:0;visibility:hidden;transition:opacity .18s,transform .18s,visibility .18s}
+.drop{position:absolute;top:calc(100% + 2px);left:50%;transform:translate(-50%,6px);min-width:300px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-m);box-shadow:0 24px 60px -20px rgba(15,19,23,.35);padding:10px;opacity:0;visibility:hidden;transition:opacity .18s,transform .18s,visibility .18s}
 .drop.wide{min-width:560px;display:grid;grid-template-columns:1fr 1fr;column-gap:6px}
 .nav-item.open .drop{opacity:1;visibility:visible;transform:translate(-50%,0)}
 .nav-item:first-child .drop{left:0;transform:translateY(6px)}
