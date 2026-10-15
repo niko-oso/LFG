@@ -899,8 +899,15 @@ dialog[open]{animation:dlg .28s cubic-bezier(.2,.8,.2,1)}
 @media(max-width:640px){.navbar .header-description{display:none}}
 /* Keep promotion words whole, including in WebKit browsers. */
 #promo,#promo h2,#promo h3,#promo p,#promo .term,#promo .btn{hyphens:none!important;-webkit-hyphens:none!important;word-break:normal!important;overflow-wrap:normal!important}
-.hero-tag{background:#242A31;color:#FFFFFF;border-color:rgba(255,255,255,.4);box-shadow:0 4px 16px rgba(0,0,0,.22)}
+.hero-tag{background:rgba(36,42,49,.82);color:#FFFFFF;border-color:rgba(255,255,255,.4);box-shadow:0 4px 16px rgba(0,0,0,.22)}
 .hero-tag i{flex-shrink:0}
+
+/* Three complete lines per promotion, without splitting words or clipping text. */
+#promoGrid .promo{container-type:inline-size}
+#promoGrid .promo h3{font-size:clamp(16px,8cqi,21px);line-height:1.25;max-width:none}
+#promoGrid .promo h3>span{display:block;white-space:nowrap}
+/* Preserve the landline in markup while hiding it from the page. */
+a[href="tel:+74950000000"]{display:none!important}
 </style>
 </head>
 <body>
@@ -1034,7 +1041,7 @@ dialog[open]{animation:dlg .28s cubic-bezier(.2,.8,.2,1)}
         </div></div>
     </nav>
     <div class="nav-cta">
-      <a class="nav-phone-m" href="tel:+74950000000"><span>+7 (495) 000-00-00</span><small>Ежедневно 9:00–21:00</small></a>
+      <a class="nav-phone-m" href="tel:+79045678871"><span>+7 (904) 567-88-71</span><small>Ежедневно 9:00–21:00</small></a>
       <div class="nav-msg">
         <a class="msg" href="https://t.me/La_Frace_Garage" target="_blank" rel="noopener" aria-label="Написать в Telegram"><img src="img/icon/telegram.svg" alt="Telegram" width="30" height="30" onerror="this.outerHTML='TG'"></a>
         <a class="msg" href="https://max.ru/u/f9LHodD0cOJihnt5V8nGIMprjqknsNqtun1prPGWl3hqawBqmjN8SAUUOSo" target="_blank" rel="noopener" aria-label="Написать в MAX"><img src="img/icon/max.svg" alt="MAX" width="30" height="30" onerror="this.outerHTML='MAX'"></a>
@@ -1335,7 +1342,7 @@ dialog[open]{animation:dlg .28s cubic-bezier(.2,.8,.2,1)}
 <div class="fabs">
   <button class="to-top" id="toTop" aria-label="Наверх"><svg class="ico"><use href="#i-up"/></svg></button>
 </div>
-<a class="fab-call" id="fabCall" href="tel:+74950000000" aria-label="Позвонить: +7 (495) 000-00-00"><span class="fab-tip">+7 (495) 000-00-00<small>Нажмите, чтобы заказать звонок</small></span><svg class="ico"><use href="#i-phone"/></svg></a>
+<a class="fab-call" id="fabCall" href="tel:+79045678871" aria-label="Позвонить: +7 (904) 567-88-71"><span class="fab-tip">+7 (904) 567-88-71<small>Нажмите, чтобы заказать звонок</small></span><svg class="ico"><use href="#i-phone"/></svg></a>
 
 <!-- mobile action bar -->
 <div class="mbar">
@@ -1493,55 +1500,80 @@ const PROMOS = [
     "conds": [
       "Кодовое слово: ZOON",
       "Подробности применения скидки уточняйте у мастера-приёмщика"
+    ],
+    "titleLines": [
+      "Скидка 10%",
+      "по кодовому слову",
+      "«ZOON»"
     ]
   },
   {
     "cls": "",
     "photo": "offer-review",
     "fig": "",
-    "t": "Оставь свой отзыв и получи скидку 10%",
+    "t": "Оставьте отзыв об автосервисе и получите скидку 10%",
     "term": "Постоянно",
     "text": "Оставьте отзыв о посещении нашего сервиса и получите скидку 10%.",
     "conds": [
       "Расскажите о своём опыте обслуживания",
       "Порядок получения скидки уточняйте у мастера-приёмщика"
+    ],
+    "titleLines": [
+      "Оставьте отзыв",
+      "об автосервисе",
+      "и получите скидку 10%"
     ]
   },
   {
     "cls": "",
     "photo": "offer-birthday",
     "fig": "",
-    "t": "Именинникам — скидка",
+    "t": "Специальная скидка на обслуживание для именинников",
     "term": "Постоянно",
     "text": "Для именинников действует специальная скидка на обслуживание автомобиля.",
     "conds": [
       "Размер скидки и условия её получения уточняйте у мастера-приёмщика"
+    ],
+    "titleLines": [
+      "Специальная скидка",
+      "на обслуживание",
+      "для именинников"
     ]
   },
   {
     "cls": "",
     "photo": "offer-suspension",
     "fig": "",
-    "t": "Бесплатная диагностика подвески — всегда",
+    "t": "Диагностика подвески вашего автомобиля всегда бесплатно",
     "term": "Постоянно",
     "text": "Проверим состояние подвески и объясним, какие узлы требуют внимания. Диагностика бесплатна для всех и при любых условиях.",
     "conds": [
       "Для всех клиентов",
       "Без обязательного ремонта у нас",
       "Без ограничений по срокам и сумме ремонта"
+    ],
+    "titleLines": [
+      "Диагностика подвески",
+      "вашего автомобиля",
+      "всегда бесплатно"
     ]
   },
   {
     "cls": "",
     "photo": "offer-codes",
     "fig": "",
-    "t": "Бесплатное чтение кодов ошибок",
+    "t": "Чтение кодов ошибок вашего автомобиля всегда бесплатно",
     "term": "Постоянно",
     "text": "Считаем коды ошибок электронных блоков автомобиля и объясним результаты проверки. Услуга всегда бесплатна.",
     "conds": [
       "Для всех клиентов",
       "Без обязательного ремонта у нас",
       "По вашей просьбе отправим результаты в мессенджер"
+    ],
+    "titleLines": [
+      "Чтение кодов ошибок",
+      "вашего автомобиля",
+      "всегда бесплатно"
     ]
   }
 ];
@@ -1696,7 +1728,7 @@ function promoGeo(){
   return `<svg class="promo-geo" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="geoGrad" gradientUnits="userSpaceOnUse" x1="40" y1="400" x2="400" y2="40"><stop offset="0" stop-color="#1B2026" stop-opacity="0"/><stop offset=".5" stop-color="#3D5A6C" stop-opacity=".4"/><stop offset="1" stop-color="#F5C400" stop-opacity=".6"/></linearGradient></defs><g fill="none" stroke="url(#geoGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${g}</g></svg>`;
 }
 $('#promoGrid').innerHTML = PROMOS.map((p,i)=>`<article class="promo ${p.cls}${p.photo?' has-ph':''}">${p.photo ? `<div class="promo-ph ph" data-photo="${p.photo}"><span class="promo-ph-hint">Фото акции</span></div>` : (p.cls==='dark' ? promoGeo() : p.g)}
-  ${p.fig?`<div class="promo-fig">${p.fig}</div>`:''}${p.cap?`<div class="promo-cap">${p.cap}</div>`:''}<h3>${p.t}</h3>
+  ${p.fig?`<div class="promo-fig">${p.fig}</div>`:''}${p.cap?`<div class="promo-cap">${p.cap}</div>`:''}<h3>${p.titleLines.map(line=>`<span>${line}</span>`).join('')}</h3>
   <div class="term">${ico('i-cal')}Действует ${p.term}</div>
   <button class="btn btn-sm" data-promo="${i}">Подробнее</button></article>`).join('');
 
@@ -1820,7 +1852,7 @@ const toTop = $('#toTop');
 const onScroll = () => toTop.classList.toggle('show', scrollY > innerHeight * 0.8);
 addEventListener('scroll', onScroll, {passive:true}); onScroll();
 toTop.addEventListener('click',()=>scrollTo({top:0,behavior: reduce ? 'auto' : 'smooth'}));
-$('#fabCall').addEventListener('click',e=>{ if(matchMedia('(hover:hover) and (pointer:fine)').matches){ e.preventDefault(); openCallback({title:'Перезвоним вам', sub:'Оставьте номер, и мастер-приёмщик перезвонит в течение 15 минут. Или позвоните сами: +7 (495) 000-00-00.'}); } });
+$('#fabCall').addEventListener('click',e=>{ if(matchMedia('(hover:hover) and (pointer:fine)').matches){ e.preventDefault(); openCallback({title:'Перезвоним вам', sub:'Оставьте номер, и мастер-приёмщик перезвонит в течение 15 минут. Или позвоните сами: +7 (904) 567-88-71.'}); } });
 
 /* ---------- DIALOGS ---------- */
 const dlgCb = $('#dlgCallback'), cbForm = $('form', dlgCb);
