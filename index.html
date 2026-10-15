@@ -1823,13 +1823,16 @@ applyPhotos();
 $$('.nav-item').forEach(it=>{
   const btn = it.querySelector('.nav-btn');
   let t;
-  const open = v => { $$('.nav-item').forEach(o=>{ if(o!==it){o.classList.remove('open');o.querySelector('.nav-btn').setAttribute('aria-expanded','false');} }); it.classList.toggle('open',v); btn.setAttribute('aria-expanded',v); };
+  const open = v => {
+    if(v) $$('.nav-item').forEach(o=>{ if(o!==it){o.classList.remove('open');o.querySelector('.nav-btn').setAttribute('aria-expanded','false');} });
+    it.classList.toggle('open',v); btn.setAttribute('aria-expanded',String(v));
+  };
   btn.addEventListener('click',()=>open(!it.classList.contains('open')));
   it.addEventListener('mouseenter',()=>{ if(matchMedia('(hover:hover)').matches){ clearTimeout(t); open(true);} });
-  it.addEventListener('mouseleave',()=>{ if(matchMedia('(hover:hover)').matches){ t=setTimeout(()=>open(false),140);} });
+  it.addEventListener('mouseleave',()=>{ if(matchMedia('(hover:hover)').matches){ clearTimeout(t); t=setTimeout(()=>{ if(!it.matches(':hover')) open(false); },140);} });
 });
 document.addEventListener('click',e=>{ if(!e.target.closest('.nav-item')) $$('.nav-item').forEach(o=>{o.classList.remove('open');o.querySelector('.nav-btn').setAttribute('aria-expanded','false');}); });
-document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ $$('.nav-item').forEach(o=>o.classList.remove('open')); closeDrawer(); } });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ $$('.nav-item').forEach(o=>{o.classList.remove('open');o.querySelector('.nav-btn').setAttribute('aria-expanded','false');}); closeDrawer(); } });
 
 /* drawer */
 const drawer = $('#drawer');
